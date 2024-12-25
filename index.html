@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document Scanner Pro</title>
+    <link rel="stylesheet" href="pdf.css" />
+    <link rel="icon" type="image/png" href="logo.png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body
+    style="
+      background-image: url('background.png');
+      background-size: cover;
+      background-attachment: fixed;
+    "
+  >
+    <div class="container">
+      <header>
+        <h1>
+          <i class="fas fa-file-alt"></i> Document Scanner
+          <img
+            src="logo.png"
+            alt="Logo"
+            style="height: 40px; vertical-align: middle"
+          />
+        </h1>
+      </header>
+
+      <div class="tab-container">
+        <div class="tab" data-tab="upload" onclick="handleTabSwitch('upload')">
+          <i class="fas fa-upload"></i> Upload
+        </div>
+        <div
+          class="tab active"
+          data-tab="camera"
+          onclick="handleTabSwitch('camera')"
+        >
+          <i class="fas fa-camera"></i> Kamera
+        </div>
+        <div class="tab" data-tab="text" onclick="handleTabSwitch('text')">
+          <i class="fas fa-keyboard"></i> Text
+        </div>
+      </div>
+
+      <div class="filename-container">
+        <input
+          type="text"
+          id="filename"
+          placeholder="Nama file output..."
+          class="filename-input"
+        />
+        <select id="imagesPerPage" class="file-type-select">
+          <option value="1">1 Gambar per halaman</option>
+          <option value="all">Semua gambar dalam 1 halaman</option>
+        </select>
+        <select id="fileType" class="file-type-select">
+          <option value="pdf">PDF</option>
+        </select>
+      </div>
+
+      <div id="uploadContent" class="content">
+        <div class="drag-area">
+          <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+          <h3>Drag & Drop file di sini</h3>
+          <span>ATAU</span>
+          <button class="browse-btn">Pilih File</button>
+          <input type="file" accept="image/*" hidden multiple />
+        </div>
+      </div>
+
+      <div id="cameraContent" class="content active">
+        <div class="camera-container">
+          <video id="video" autoplay playsinline></video>
+          <canvas id="canvas" style="display: none"></canvas>
+          <div class="camera-controls">
+            <button class="control-btn" onclick="openCamera()">
+              <i class="fas fa-camera"></i> Buka Kamera
+            </button>
+            <button
+              class="control-btn"
+              onclick="captureImage()"
+              style="display: none"
+            >
+              <i class="fas fa-circle"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="textContent" class="content">
+        <textarea
+          id="textInput"
+          placeholder="Ketik atau paste teks di sini..."
+        ></textarea>
+      </div>
+
+      <div class="preview-container">
+        <h3>Preview Dokumen</h3>
+        <div id="imageList" class="image-list"></div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="generate-btn" onclick="generateDocument()">
+          <i class="fas fa-file-export"></i> Generate Dokumen
+        </button>
+        <button class="clear-btn" onclick="clearAll()">
+          <i class="fas fa-trash"></i> Hapus Semua
+        </button>
+      </div>
+
+      <div class="loader" id="loader">
+        <div class="spinner"></div>
+        <p>Generating document...</p>
+      </div>
+    </div>
+
+    <footer>
+      <a
+        href="https://simbahresearch.my.id"
+        target="_blank"
+        class="footer-brand"
+        >&copy; 2024 | Si'Mbah_Research</a
+      >
+      <div class="social-links">
+        <a
+          href="https://youtube.com/@simbahresearch"
+          target="_blank"
+          class="social-link"
+        >
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a
+          href="https://instagram.com/simbah_research"
+          target="_blank"
+          class="social-link"
+        >
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a
+          href="https://facebook.com/simbahresearch"
+          target="_blank"
+          class="social-link"
+        >
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a
+          href="https://tiktok.com/@simbahresearch"
+          target="_blank"
+          class="social-link"
+        >
+          <i class="fab fa-tiktok"></i>
+        </a>
+      </div>
+    </footer>
+
+    <script src="pdf.js"></script>
+  </body>
+</html>

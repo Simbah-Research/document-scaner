@@ -1,0 +1,415 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+:root {
+  --primary-gradient: linear-gradient(135deg, #2563eb, #1d4ed8);
+  --secondary-gradient: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  --container-gradient: linear-gradient(to bottom right, #ffffff, #f8fafc);
+  --accent-color: #3b82f6;
+  --shadow-color: rgba(37, 99, 235, 0.1);
+  --container-width-desktop: 800px;
+  --container-width-tablet: 95%;
+  --spacing-unit: clamp(10px, 2vw, 20px);
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.container {
+  width: clamp(320px, 90%, var(--container-width-desktop));
+  margin: 2rem auto;
+  background: var(--container-gradient);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px var(--shadow-color), 0 1px 3px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+header {
+  text-align: center;
+  margin-bottom: clamp(20px, 4vw, 40px);
+}
+
+header h1 {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.tab-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(5px, 1vw, 10px);
+  margin-bottom: var(--spacing-unit);
+}
+
+.tab {
+  flex: 1 1 auto;
+  min-width: max(100px, calc(33% - 10px));
+  padding: clamp(8px, 1.5vw, 12px);
+  text-align: center;
+  background: var(--secondary-gradient);
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  transition: transform 0.2s ease;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+}
+
+.tab:hover {
+  transform: translateY(-2px);
+  background: var(--primary-gradient);
+  color: white;
+}
+
+.tab.active {
+  background: var(--primary-gradient);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.filename-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(8px, 1.5vw, 10px);
+  margin-bottom: var(--spacing-unit);
+}
+
+.filename-input,
+.file-type-select {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-radius: 8px;
+  padding: clamp(8px, 1.5vw, 12px);
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  transition: all 0.3s ease;
+}
+
+.filename-input {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filename-input:focus,
+.file-type-select:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.drag-area {
+  background: var(--secondary-gradient);
+  border: 2px dashed rgba(37, 99, 235, 0.3);
+  padding: clamp(20px, 4vw, 40px);
+  border-radius: 8px;
+  text-align: center;
+  margin: var(--spacing-unit) 0;
+  transition: all 0.3s ease;
+}
+
+.drag-area:hover {
+  border-color: var(--accent-color);
+  transform: scale(1.01);
+}
+
+.drag-area .icon {
+  font-size: clamp(30px, 6vw, 50px);
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.camera-container {
+  width: 100%;
+  position: relative;
+  margin: var(--spacing-unit) 0;
+}
+
+#video {
+  width: 100%;
+  max-height: 70vh;
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--secondary-gradient);
+}
+
+.camera-controls,
+.action-buttons {
+  display: flex;
+  gap: clamp(8px, 1.5vw, 10px);
+  margin-top: var(--spacing-unit);
+  flex-wrap: wrap;
+}
+
+.control-btn,
+.generate-btn,
+.clear-btn,
+.browse-btn {
+  flex: 1;
+  min-width: max(120px, calc(50% - 5px));
+  padding: clamp(8px, 1.5vw, 12px);
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  background: var(--primary-gradient);
+  color: white;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.control-btn:hover,
+.generate-btn:hover,
+.browse-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.clear-btn {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+#textInput {
+  width: 100%;
+  min-height: clamp(150px, 30vh, 300px);
+  padding: clamp(10px, 2vw, 15px);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-radius: 8px;
+  resize: vertical;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  transition: all 0.3s ease;
+}
+
+#textInput:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.preview-container {
+  margin: var(--spacing-unit) 0;
+  padding: clamp(15px, 3vw, 25px);
+  background: var(--secondary-gradient);
+  border-radius: 12px;
+}
+
+.image-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(140px, 100%), 1fr));
+  gap: clamp(10px, 2vw, 15px);
+}
+
+.image-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.image-item:hover {
+  transform: scale(1.05);
+}
+
+.image-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+footer {
+  text-align: center;
+  padding: clamp(15px, 3vw, 20px);
+  background: var(--container-gradient);
+  margin-top: auto;
+  box-shadow: 0 -2px 10px var(--shadow-color);
+}
+
+.footer-brand {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.social-link {
+  color: var(--accent-color);
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+.social-link:hover {
+  transform: translateY(-3px);
+  color: #1d4ed8;
+}
+
+.file-counter {
+  font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.warning-message {
+  background: linear-gradient(135deg, #fff3cd, #ffd700);
+  color: #856404;
+  padding: clamp(8px, 1.5vw, 10px);
+  border-radius: 6px;
+  margin-top: var(--spacing-unit);
+  text-align: center;
+  animation: fadeIn 0.3s;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+}
+
+.file-size {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: clamp(0.75rem, 1.2vw, 0.8rem);
+}
+
+.loader {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  z-index: 1000;
+}
+
+.spinner {
+  width: clamp(30px, 8vw, 50px);
+  height: clamp(30px, 8vw, 50px);
+  border: clamp(3px, 1vw, 5px) solid rgba(255, 255, 255, 0.3);
+  border-top: clamp(3px, 1vw, 5px) solid var(--accent-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: clamp(10px, 2vw, 15px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    padding: 15px;
+  }
+
+  .tab-container,
+  .filename-container,
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .tab,
+  .file-type-select,
+  .control-btn,
+  .generate-btn,
+  .clear-btn {
+    width: 100%;
+    min-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+Copy.content {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.content.active {
+  display: block;
+  opacity: 1;
+}
+
+.preview-container h3 {
+  margin-bottom: clamp(10px, 2vw, 15px);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.drag-area h3 {
+  margin: clamp(10px, 2vw, 15px) 0;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--accent-color);
+}
+
+.drag-area span {
+  color: rgba(0, 0, 0, 0.6);
+  margin: 1rem 0;
+  display: block;
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .container {
+    width: 95%;
+    margin: 10px auto;
+  }
+  .tab {
+    min-width: calc(50% - 5px);
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    width: 90%;
+  }
+}
