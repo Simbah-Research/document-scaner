@@ -231,37 +231,38 @@ header h1 {
 }
 
 footer {
-  text-align: center;
-  padding: clamp(15px, 3vw, 20px);
-  background: var(--container-gradient);
-  margin-top: auto;
-  box-shadow: 0 -2px 10px var(--shadow-color);
+ text-align: center;
+ padding: clamp(15px, 3vw, 20px);
+ background: linear-gradient(135deg, #1e293b, #0f172a);
+ color: #fff;
+ margin-top: auto;
+ box-shadow: 0 -2px 10px var(--shadow-color);
 }
 
 .footer-brand {
-  color: var(--accent-color);
-  text-decoration: none;
-  font-size: clamp(0.875rem, 1.5vw, 1rem);
-  display: block;
-  margin-bottom: 10px;
+ color: #60a5fa;
+ text-decoration: none;
+ font-size: clamp(0.875rem, 1.5vw, 1rem);
+ display: block;
+ margin-bottom: 10px;
 }
 
 .social-links {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 10px;
+ display: flex;
+ justify-content: center;
+ gap: 15px;
+ margin-top: 10px;
 }
 
 .social-link {
-  color: var(--accent-color);
-  font-size: 20px;
-  transition: transform 0.3s ease;
+ color: #60a5fa;
+ font-size: 20px;
+ transition: transform 0.3s ease;
 }
 
 .social-link:hover {
-  transform: translateY(-3px);
-  color: #1d4ed8;
+ transform: translateY(-3px);
+ color: #93c5fd; 
 }
 
 .file-counter {
